@@ -1,9 +1,9 @@
-BlueCats Loop API Client
+# BlueCats Loop API Client
 .NET Standard 2.0 class library
 
 NuGet Package
 
-This library is transport agnostic, allowing any underlying serial device library. This simply handles the parsing and encoding of serial packets being sent and recieved over serial. At this time, .NET Standard 2.0 has the highest level of platform compatibility, supporting 
+
 
 ### Platforms
 
