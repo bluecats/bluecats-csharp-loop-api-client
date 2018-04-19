@@ -5,21 +5,34 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using BlueCats.Loop.Events.Api.Client.Models;
+using BlueCats.Loop.Api.Client.Models;
 using Microsoft.AspNetCore.WebUtilities;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace BlueCats.Loop.Api.Client {
 
-    public class LoopEventClient {
+    /// <summary>
+    /// Provides an async interface to the BlueCats Loop web API 
+    /// </summary>
+    public class LoopClient {
 
+        /// <summary>
+        /// Gets a value indicating whether this instance is authenticated.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance is authenticated; otherwise, <c>false</c>.
+        /// </value>
         public bool IsAuthenticated => !string.IsNullOrEmpty( _authToken );
 
         private readonly HttpClient _client;
         private string _authToken;
 
-        public LoopEventClient( string baseUrl ) {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LoopClient"/> class.
+        /// </summary>
+        /// <param name="baseUrl">The base URL.</param>
+        public LoopClient( string baseUrl ) {
             if ( baseUrl == null ) throw new ArgumentNullException( nameof(baseUrl) );
             var baseUrl1 = new Uri( baseUrl );
             _client = new HttpClient { BaseAddress = baseUrl1 };
@@ -28,6 +41,12 @@ namespace BlueCats.Loop.Api.Client {
             _client.DefaultRequestHeaders.Add( "X-API-HEADER", "1" );
         }
 
+        /// <summary>
+        /// Authenticates with the Loop API asynchronously. This is required before making any other API calls.
+        /// </summary>
+        /// <param name="email">Loop user email.</param>
+        /// <param name="password">Loop user password.</param>
+        /// <exception cref="Exception">Received an empty auth token</exception>
         public async Task LoginAsync( string email, string password ) {
             if ( email == null ) throw new ArgumentNullException( nameof(email) );
             if ( password == null ) throw new ArgumentNullException( nameof(password) );
@@ -40,9 +59,9 @@ namespace BlueCats.Loop.Api.Client {
             var request = _client.PostAsync( route, content );
 
             // Response
-            using ( var response = await request ) {
+            using ( var response = await request.ConfigureAwait( false ) ) {
                 response.EnsureSuccessStatusCode();
-                json = await response.Content.ReadAsStringAsync();
+                json = await response.Content.ReadAsStringAsync().ConfigureAwait( false );
                 var jsonObj = JObject.Parse( json );
                 _authToken = (string) jsonObj["auth"];
                 if ( string.IsNullOrEmpty( _authToken ) ) {
@@ -51,7 +70,19 @@ namespace BlueCats.Loop.Api.Client {
             }
         }
 
-        public async Task< PaginatedEvents > GetPaginatedEventsAsync( string objectType, string objectID, string eventType = null, string lastKeyID = null, DateTime? lastKeyTimestamp = null, int? limit = null ) {
+        /// <summary>
+        /// Gets the paginated Loop Events asynchronously.
+        /// </summary>
+        /// <param name="objectType">Type of the Loop Object.</param>
+        /// <param name="objectID">The Loop Object identifier.</param>
+        /// <param name="eventType">Type of the Loop Event.</param>
+        /// <param name="lastKeyID">The identifier for the key of the page to start on.</param>
+        /// <param name="lastKeyTimestamp">The timestamp of the page to start on.</param>
+        /// <param name="limit">The Page limit.</param>
+        /// <param name="startTime">The window start time.</param>
+        /// <param name="endTime">The window end time.</param>
+        /// <returns>The paginated events</returns>
+        public async Task< PaginatedEvents > GetPaginatedEventsAsync( string objectType, string objectID, string eventType = null, string lastKeyID = null, DateTime? lastKeyTimestamp = null, int? limit = null, DateTime? startTime = null, DateTime? endTime = null ) {
             if ( objectType == null ) throw new ArgumentNullException( nameof(objectType) );
             if ( objectID == null ) throw new ArgumentNullException( nameof(objectID) );
             EnsureAuthenticated();
@@ -66,12 +97,18 @@ namespace BlueCats.Loop.Api.Client {
             if ( !string.IsNullOrEmpty( lastKeyID ) ) {
                 queryStr = QueryHelpers.AddQueryString( queryStr, nameof( lastKeyID ), lastKeyID );
             }
-            if ( lastKeyTimestamp != null ) {
-                var timestamp = lastKeyTimestamp.Value.ToUniversalTime().ToString( CultureInfo.InvariantCulture );
+            if ( lastKeyTimestamp.HasValue ) {
+                var timestamp = lastKeyTimestamp.Value.ToUniversalTime().ToString( Constants.TIMESTAMP_FORMAT );
                 queryStr = QueryHelpers.AddQueryString( queryStr, "lastKeyTS", timestamp );
             }
-            if ( limit != null ) {
+            if ( limit.HasValue ) {
                 queryStr = QueryHelpers.AddQueryString( queryStr, nameof( limit ), limit.ToString() );
+            }
+            if ( startTime.HasValue && endTime.HasValue) {
+                var formattedTimestamp = startTime.Value.ToUniversalTime().ToString( Constants.TIMESTAMP_FORMAT );
+                queryStr = QueryHelpers.AddQueryString( queryStr, "tsStart", formattedTimestamp );
+                formattedTimestamp = endTime.Value.ToUniversalTime().ToString( Constants.TIMESTAMP_FORMAT );
+                queryStr = QueryHelpers.AddQueryString( queryStr, "tsEnd", formattedTimestamp );
             }
             var uri = new Uri( queryStr, UriKind.Relative );
             var request = _client.GetAsync( uri );
@@ -85,6 +122,12 @@ namespace BlueCats.Loop.Api.Client {
             }
         }
 
+        /// <summary>
+        /// Posts Loop Events asynchronously.
+        /// </summary>
+        /// <param name="edgeMac">The MAC Address of the Edge Relay that generated the events.</param>
+        /// <param name="eventInfos">The events to post.</param>
+        /// <returns>The response string from the request</returns>
         public async Task< string > PostEventsAsync( string edgeMac, params EventInfo[] eventInfos ) {
             if ( edgeMac == null ) throw new ArgumentNullException( nameof(edgeMac) );
             if ( eventInfos == null ) throw new ArgumentNullException( nameof(eventInfos) );

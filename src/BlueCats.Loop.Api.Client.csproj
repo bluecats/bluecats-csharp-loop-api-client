@@ -7,9 +7,15 @@
     <Version>0.0.1</Version>
     <Authors>BlueCats</Authors>
     <Company>BlueCats Inc.</Company>
-    <Description>.Net Core 2.0 Client for BlueCats' Loop web API.</Description>
+    <Description>The official BlueCats Loop web API client for .NET Core 2.0</Description>
     <Copyright>2018 BlueCats Inc.</Copyright>
     <PackageLicenseUrl>https://raw.githubusercontent.com/bluecats/bluecats-loop-api-client/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/bluecats/bluecats-csharp-loop-api-client</PackageProjectUrl>
+    <PackageIconUrl>https://avatars3.githubusercontent.com/u/5086410</PackageIconUrl>
+    <RepositoryUrl>https://github.com/bluecats/bluecats-csharp-loop-api-client</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>bluecats, loop, api, api client, client, web, rest</PackageTags>
+    <PackageReleaseNotes />
   </PropertyGroup>
 
   <ItemGroup>
