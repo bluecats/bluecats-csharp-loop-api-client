@@ -1,9 +1,7 @@
 # BlueCats Loop API Client
 .NET Standard 2.0 class library
 
-NuGet Package
-
-
+[NuGet Package](https://www.nuget.org/packages/BlueCats.Loop.Api.Client/0.0.1)
 
 ### Platforms
 
