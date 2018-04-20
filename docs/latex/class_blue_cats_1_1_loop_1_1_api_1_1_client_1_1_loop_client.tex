@@ -1,0 +1,165 @@
+\hypertarget{class_blue_cats_1_1_loop_1_1_api_1_1_client_1_1_loop_client}{}\section{Blue\+Cats.\+Loop.\+Api.\+Client.\+Loop\+Client Class Reference}
+\label{class_blue_cats_1_1_loop_1_1_api_1_1_client_1_1_loop_client}\index{Blue\+Cats.\+Loop.\+Api.\+Client.\+Loop\+Client@{Blue\+Cats.\+Loop.\+Api.\+Client.\+Loop\+Client}}
+
+
+Provides an async interface to the \mbox{\hyperlink{namespace_blue_cats}{Blue\+Cats}} \mbox{\hyperlink{namespace_blue_cats_1_1_loop}{Loop}} web A\+PI  
+
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_blue_cats_1_1_loop_1_1_api_1_1_client_1_1_loop_client_aea0919a8b6c36eda28b5bfcd1f4d5a63}{Loop\+Client}} (string base\+Url)
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the \mbox{\hyperlink{class_blue_cats_1_1_loop_1_1_api_1_1_client_1_1_loop_client}{Loop\+Client}} class. \end{DoxyCompactList}\item 
+async Task \mbox{\hyperlink{class_blue_cats_1_1_loop_1_1_api_1_1_client_1_1_loop_client_a13bffad1550375ce8425415710dfbce1}{Login\+Async}} (string email, string password)
+\begin{DoxyCompactList}\small\item\em Authenticates with the \mbox{\hyperlink{namespace_blue_cats_1_1_loop}{Loop}} A\+PI asynchronously. This is required before making any other A\+PI calls. \end{DoxyCompactList}\item 
+async Task$<$ \mbox{\hyperlink{class_blue_cats_1_1_loop_1_1_api_1_1_client_1_1_models_1_1_paginated_events}{Paginated\+Events}} $>$ \mbox{\hyperlink{class_blue_cats_1_1_loop_1_1_api_1_1_client_1_1_loop_client_a405d05d5f9109565cc7657f64fe1e6ef}{Get\+Paginated\+Events\+Async}} (string object\+Type, string object\+ID, string event\+Type=null, string last\+Key\+ID=null, Date\+Time? last\+Key\+Timestamp=null, int? limit=null, Date\+Time? start\+Time=null, Date\+Time? end\+Time=null)
+\begin{DoxyCompactList}\small\item\em Gets the paginated \mbox{\hyperlink{namespace_blue_cats_1_1_loop}{Loop}} Events asynchronously. \end{DoxyCompactList}\item 
+async Task$<$ string $>$ \mbox{\hyperlink{class_blue_cats_1_1_loop_1_1_api_1_1_client_1_1_loop_client_af4b7413fb2769727cbc5c88b4b7f05de}{Post\+Events\+Async}} (string edge\+Mac, params \mbox{\hyperlink{class_blue_cats_1_1_loop_1_1_api_1_1_client_1_1_models_1_1_event_info}{Event\+Info}}\mbox{[}$\,$\mbox{]} event\+Infos)
+\begin{DoxyCompactList}\small\item\em Posts \mbox{\hyperlink{namespace_blue_cats_1_1_loop}{Loop}} Events asynchronously. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{class_blue_cats_1_1_loop_1_1_api_1_1_client_1_1_loop_client_a412425e79f996f5bc9c16a17b86e5926}{Is\+Authenticated}} =$>$ !string.\+Is\+Null\+Or\+Empty( \+\_\+auth\+Token )
+\begin{DoxyCompactList}\small\item\em Gets a value indicating whether this instance is authenticated. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Provides an async interface to the \mbox{\hyperlink{namespace_blue_cats}{Blue\+Cats}} \mbox{\hyperlink{namespace_blue_cats_1_1_loop}{Loop}} web A\+PI 
+
+
+
+Definition at line 18 of file Loop\+Client.\+cs.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_blue_cats_1_1_loop_1_1_api_1_1_client_1_1_loop_client_aea0919a8b6c36eda28b5bfcd1f4d5a63}\label{class_blue_cats_1_1_loop_1_1_api_1_1_client_1_1_loop_client_aea0919a8b6c36eda28b5bfcd1f4d5a63}} 
+\index{Blue\+Cats\+::\+Loop\+::\+Api\+::\+Client\+::\+Loop\+Client@{Blue\+Cats\+::\+Loop\+::\+Api\+::\+Client\+::\+Loop\+Client}!Loop\+Client@{Loop\+Client}}
+\index{Loop\+Client@{Loop\+Client}!Blue\+Cats\+::\+Loop\+::\+Api\+::\+Client\+::\+Loop\+Client@{Blue\+Cats\+::\+Loop\+::\+Api\+::\+Client\+::\+Loop\+Client}}
+\subsubsection{\texorpdfstring{Loop\+Client()}{LoopClient()}}
+{\footnotesize\ttfamily Blue\+Cats.\+Loop.\+Api.\+Client.\+Loop\+Client.\+Loop\+Client (\begin{DoxyParamCaption}\item[{string}]{base\+Url }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Initializes a new instance of the \mbox{\hyperlink{class_blue_cats_1_1_loop_1_1_api_1_1_client_1_1_loop_client}{Loop\+Client}} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em base\+Url} & The base U\+RL.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 35 of file Loop\+Client.\+cs.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_blue_cats_1_1_loop_1_1_api_1_1_client_1_1_loop_client_a405d05d5f9109565cc7657f64fe1e6ef}\label{class_blue_cats_1_1_loop_1_1_api_1_1_client_1_1_loop_client_a405d05d5f9109565cc7657f64fe1e6ef}} 
+\index{Blue\+Cats\+::\+Loop\+::\+Api\+::\+Client\+::\+Loop\+Client@{Blue\+Cats\+::\+Loop\+::\+Api\+::\+Client\+::\+Loop\+Client}!Get\+Paginated\+Events\+Async@{Get\+Paginated\+Events\+Async}}
+\index{Get\+Paginated\+Events\+Async@{Get\+Paginated\+Events\+Async}!Blue\+Cats\+::\+Loop\+::\+Api\+::\+Client\+::\+Loop\+Client@{Blue\+Cats\+::\+Loop\+::\+Api\+::\+Client\+::\+Loop\+Client}}
+\subsubsection{\texorpdfstring{Get\+Paginated\+Events\+Async()}{GetPaginatedEventsAsync()}}
+{\footnotesize\ttfamily async Task$<$ \mbox{\hyperlink{class_blue_cats_1_1_loop_1_1_api_1_1_client_1_1_models_1_1_paginated_events}{Paginated\+Events}} $>$ Blue\+Cats.\+Loop.\+Api.\+Client.\+Loop\+Client.\+Get\+Paginated\+Events\+Async (\begin{DoxyParamCaption}\item[{string}]{object\+Type,  }\item[{string}]{object\+ID,  }\item[{string}]{event\+Type = {\ttfamily null},  }\item[{string}]{last\+Key\+ID = {\ttfamily null},  }\item[{Date\+Time?}]{last\+Key\+Timestamp = {\ttfamily null},  }\item[{int?}]{limit = {\ttfamily null},  }\item[{Date\+Time?}]{start\+Time = {\ttfamily null},  }\item[{Date\+Time?}]{end\+Time = {\ttfamily null} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the paginated \mbox{\hyperlink{namespace_blue_cats_1_1_loop}{Loop}} Events asynchronously. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em object\+Type} & Type of the \mbox{\hyperlink{namespace_blue_cats_1_1_loop}{Loop}} Object.\\
+\hline
+{\em object\+ID} & The \mbox{\hyperlink{namespace_blue_cats_1_1_loop}{Loop}} Object identifier.\\
+\hline
+{\em event\+Type} & Type of the \mbox{\hyperlink{namespace_blue_cats_1_1_loop}{Loop}} Event.\\
+\hline
+{\em last\+Key\+ID} & The identifier for the key of the page to start on.\\
+\hline
+{\em last\+Key\+Timestamp} & The timestamp of the page to start on.\\
+\hline
+{\em limit} & The Page limit.\\
+\hline
+{\em start\+Time} & The window start time.\\
+\hline
+{\em end\+Time} & The window end time.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The paginated events
+\end{DoxyReturn}
+
+
+Definition at line 85 of file Loop\+Client.\+cs.
+
+\mbox{\Hypertarget{class_blue_cats_1_1_loop_1_1_api_1_1_client_1_1_loop_client_a13bffad1550375ce8425415710dfbce1}\label{class_blue_cats_1_1_loop_1_1_api_1_1_client_1_1_loop_client_a13bffad1550375ce8425415710dfbce1}} 
+\index{Blue\+Cats\+::\+Loop\+::\+Api\+::\+Client\+::\+Loop\+Client@{Blue\+Cats\+::\+Loop\+::\+Api\+::\+Client\+::\+Loop\+Client}!Login\+Async@{Login\+Async}}
+\index{Login\+Async@{Login\+Async}!Blue\+Cats\+::\+Loop\+::\+Api\+::\+Client\+::\+Loop\+Client@{Blue\+Cats\+::\+Loop\+::\+Api\+::\+Client\+::\+Loop\+Client}}
+\subsubsection{\texorpdfstring{Login\+Async()}{LoginAsync()}}
+{\footnotesize\ttfamily async Task Blue\+Cats.\+Loop.\+Api.\+Client.\+Loop\+Client.\+Login\+Async (\begin{DoxyParamCaption}\item[{string}]{email,  }\item[{string}]{password }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Authenticates with the \mbox{\hyperlink{namespace_blue_cats_1_1_loop}{Loop}} A\+PI asynchronously. This is required before making any other A\+PI calls. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em email} & \mbox{\hyperlink{namespace_blue_cats_1_1_loop}{Loop}} user email.\\
+\hline
+{\em password} & \mbox{\hyperlink{namespace_blue_cats_1_1_loop}{Loop}} user password.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & Received an empty auth token\\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line 50 of file Loop\+Client.\+cs.
+
+\mbox{\Hypertarget{class_blue_cats_1_1_loop_1_1_api_1_1_client_1_1_loop_client_af4b7413fb2769727cbc5c88b4b7f05de}\label{class_blue_cats_1_1_loop_1_1_api_1_1_client_1_1_loop_client_af4b7413fb2769727cbc5c88b4b7f05de}} 
+\index{Blue\+Cats\+::\+Loop\+::\+Api\+::\+Client\+::\+Loop\+Client@{Blue\+Cats\+::\+Loop\+::\+Api\+::\+Client\+::\+Loop\+Client}!Post\+Events\+Async@{Post\+Events\+Async}}
+\index{Post\+Events\+Async@{Post\+Events\+Async}!Blue\+Cats\+::\+Loop\+::\+Api\+::\+Client\+::\+Loop\+Client@{Blue\+Cats\+::\+Loop\+::\+Api\+::\+Client\+::\+Loop\+Client}}
+\subsubsection{\texorpdfstring{Post\+Events\+Async()}{PostEventsAsync()}}
+{\footnotesize\ttfamily async Task$<$ string $>$ Blue\+Cats.\+Loop.\+Api.\+Client.\+Loop\+Client.\+Post\+Events\+Async (\begin{DoxyParamCaption}\item[{string}]{edge\+Mac,  }\item[{params \mbox{\hyperlink{class_blue_cats_1_1_loop_1_1_api_1_1_client_1_1_models_1_1_event_info}{Event\+Info}} \mbox{[}$\,$\mbox{]}}]{event\+Infos }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Posts \mbox{\hyperlink{namespace_blue_cats_1_1_loop}{Loop}} Events asynchronously. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em edge\+Mac} & The M\+AC Address of the Edge Relay that generated the events.\\
+\hline
+{\em event\+Infos} & The events to post.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The response string from the request
+\end{DoxyReturn}
+
+
+Definition at line 131 of file Loop\+Client.\+cs.
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_blue_cats_1_1_loop_1_1_api_1_1_client_1_1_loop_client_a412425e79f996f5bc9c16a17b86e5926}\label{class_blue_cats_1_1_loop_1_1_api_1_1_client_1_1_loop_client_a412425e79f996f5bc9c16a17b86e5926}} 
+\index{Blue\+Cats\+::\+Loop\+::\+Api\+::\+Client\+::\+Loop\+Client@{Blue\+Cats\+::\+Loop\+::\+Api\+::\+Client\+::\+Loop\+Client}!Is\+Authenticated@{Is\+Authenticated}}
+\index{Is\+Authenticated@{Is\+Authenticated}!Blue\+Cats\+::\+Loop\+::\+Api\+::\+Client\+::\+Loop\+Client@{Blue\+Cats\+::\+Loop\+::\+Api\+::\+Client\+::\+Loop\+Client}}
+\subsubsection{\texorpdfstring{Is\+Authenticated}{IsAuthenticated}}
+{\footnotesize\ttfamily bool Blue\+Cats.\+Loop.\+Api.\+Client.\+Loop\+Client.\+Is\+Authenticated =$>$ !string.\+Is\+Null\+Or\+Empty( \+\_\+auth\+Token )}
+
+
+
+Gets a value indicating whether this instance is authenticated. 
+
+{\ttfamily true} if this instance is authenticated; otherwise, {\ttfamily false}. 
+
+Definition at line 26 of file Loop\+Client.\+cs.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\mbox{\hyperlink{_loop_client_8cs}{Loop\+Client.\+cs}}\end{DoxyCompactItemize}
