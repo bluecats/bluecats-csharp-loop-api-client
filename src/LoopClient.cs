@@ -46,8 +46,9 @@ namespace BlueCats.Loop.Api.Client {
         /// </summary>
         /// <param name="email">Loop user email.</param>
         /// <param name="password">Loop user password.</param>
-        /// <exception cref="Exception">Received an empty auth token</exception>
-        public async Task LoginAsync( string email, string password ) {
+        /// <returns>The authenticated user info</returns>
+        /// <exception cref="System.Exception">Received an empty auth token from API</exception>
+        public async Task< User > LoginAsync( string email, string password ) {
             if ( email == null ) throw new ArgumentNullException( nameof(email) );
             if ( password == null ) throw new ArgumentNullException( nameof(password) );
             // Request
@@ -59,15 +60,14 @@ namespace BlueCats.Loop.Api.Client {
             var request = _client.PostAsync( route, content );
 
             // Response
-            using ( var response = await request.ConfigureAwait( false ) ) {
-                response.EnsureSuccessStatusCode();
-                json = await response.Content.ReadAsStringAsync().ConfigureAwait( false );
-                var jsonObj = JObject.Parse( json );
-                _authToken = (string) jsonObj["auth"];
-                if ( string.IsNullOrEmpty( _authToken ) ) {
-                    throw new Exception( "Received an empty auth token" );
-                }
+            var jsonContent = await UnwrapResponseStringAsync( request ).ConfigureAwait( false );
+            var jsonObj = JObject.Parse( jsonContent );
+            _authToken = (string) jsonObj["auth"];
+            if ( string.IsNullOrEmpty( _authToken ) ) {
+                throw new Exception( "Received an empty auth token from API" );
             }
+            var user = JsonConvert.DeserializeObject< User >( jsonContent );
+            return user;
         }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace BlueCats.Loop.Api.Client {
         /// <param name="startTime">The window start time.</param>
         /// <param name="endTime">The window end time.</param>
         /// <returns>The paginated events</returns>
-        public async Task< PaginatedEvents > GetPaginatedEventsAsync( string objectType, string objectID, string eventType = null, string lastKeyID = null, DateTime? lastKeyTimestamp = null, int? limit = null, DateTime? startTime = null, DateTime? endTime = null ) {
+        public async Task< PaginatedEvents > GetEventsAsync( string objectType, string objectID, string eventType = null, string lastKeyID = null, DateTime? lastKeyTimestamp = null, int? limit = null, DateTime? startTime = null, DateTime? endTime = null ) {
             if ( objectType == null ) throw new ArgumentNullException( nameof(objectType) );
             if ( objectID == null ) throw new ArgumentNullException( nameof(objectID) );
             EnsureAuthenticated();
@@ -114,12 +114,9 @@ namespace BlueCats.Loop.Api.Client {
             var request = _client.GetAsync( uri );
             
             // Response
-            using ( var response = await request.ConfigureAwait( false ) ) {
-                response.EnsureSuccessStatusCode();
-                var json = await response.Content.ReadAsStringAsync().ConfigureAwait( false );
-                var loopEvents = JsonConvert.DeserializeObject< PaginatedEvents >( json );
-                return loopEvents;
-            }
+            var jsonContent = await UnwrapResponseStringAsync( request ).ConfigureAwait( false );
+            var loopEvents = JsonConvert.DeserializeObject< PaginatedEvents >( jsonContent );
+            return loopEvents;
         }
 
         /// <summary>
