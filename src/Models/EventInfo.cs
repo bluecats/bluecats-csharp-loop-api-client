@@ -78,8 +78,8 @@ namespace BlueCats.Loop.Api.Client.Models {
         /// <returns>A reference to this instance</returns>
         public EventInfo AddEntries(IReadOnlyDictionary<string, object> keyValuePairs) {
             if (keyValuePairs == null) throw new ArgumentNullException(nameof(keyValuePairs));
-            foreach (var (key, value) in keyValuePairs) {
-                AddEntry(key, value);
+            foreach ( var pair in keyValuePairs) {
+                AddEntry(pair.Key, pair.Value);
             }
             return this;
         }
