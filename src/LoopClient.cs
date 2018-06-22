@@ -28,6 +28,7 @@ namespace BlueCats.Loop.Api.Client {
         private readonly HttpClient _client;
         private string _authToken;
 
+
         /// <summary>
         /// Initializes a new instance of the <see cref="LoopClient"/> class.
         /// </summary>
@@ -51,6 +52,7 @@ namespace BlueCats.Loop.Api.Client {
         public async Task< User > LoginAsync( string email, string password ) {
             if ( email == null ) throw new ArgumentNullException( nameof(email) );
             if ( password == null ) throw new ArgumentNullException( nameof(password) );
+
             // Request
             // Create json string from a C# Anonymous Class and JObject to serialize
             var json = JObject.FromObject( new { email, password } ).ToString();
@@ -66,6 +68,7 @@ namespace BlueCats.Loop.Api.Client {
             if ( string.IsNullOrEmpty( _authToken ) ) {
                 throw new Exception( "Received an empty auth token from API" );
             }
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue( "Basic", "" );
             var user = JsonConvert.DeserializeObject< User >( jsonContent );
             return user;
         }
@@ -139,6 +142,22 @@ namespace BlueCats.Loop.Api.Client {
             } );
             var json = JsonConvert.SerializeObject( jObject );
             var request = _client.PostAsync( uri, new StringContent( json, Encoding.ASCII, "application/json" ) );
+            
+            // Response
+            return await UnwrapResponseStringAsync( request ).ConfigureAwait( false );
+        }
+
+        /// <summary>
+        /// Gets the schema asynchronous.
+        /// </summary>
+        /// <returns>The Loop API Schema as a JSON string</returns>
+        public async Task< string > GetSchemaAsync() {
+            EnsureAuthenticated();
+
+            // Request
+            const string ROUTE = "schema";
+            var uri = new Uri( ROUTE, UriKind.Relative );
+            var request = _client.GetAsync( uri );
             
             // Response
             return await UnwrapResponseStringAsync( request ).ConfigureAwait( false );
