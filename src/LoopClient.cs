@@ -23,10 +23,10 @@ namespace BlueCats.Loop.Api.Client {
         /// <value>
         ///   <c>true</c> if this instance is authenticated; otherwise, <c>false</c>.
         /// </value>
-        public bool IsAuthenticated => !string.IsNullOrEmpty( _authToken );
+        public bool IsAuthenticated => !string.IsNullOrEmpty( _authString );
 
         private readonly HttpClient _client;
-        private string _authToken;
+        private string _authString;
 
 
         /// <summary>
@@ -64,11 +64,11 @@ namespace BlueCats.Loop.Api.Client {
             // Response
             var jsonContent = await UnwrapResponseStringAsync( request ).ConfigureAwait( false );
             var jsonObj = JObject.Parse( jsonContent );
-            _authToken = (string) jsonObj["auth"];
-            if ( string.IsNullOrEmpty( _authToken ) ) {
+            _authString = (string) jsonObj["auth"];
+            if ( string.IsNullOrEmpty( _authString ) ) {
                 throw new Exception( "Received an empty auth token from API" );
             }
-            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue( "Basic", "" );
+            _client.DefaultRequestHeaders.Add( "Authorization", _authString );
             var user = JsonConvert.DeserializeObject< User >( jsonContent );
             return user;
         }
