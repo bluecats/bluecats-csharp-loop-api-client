@@ -6,7 +6,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using BlueCats.Loop.Api.Client.Models;
-using Microsoft.AspNetCore.WebUtilities;
+//using Microsoft.AspNetCore.WebUtilities;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -85,42 +85,42 @@ namespace BlueCats.Loop.Api.Client {
         /// <param name="startTime">The window start time.</param>
         /// <param name="endTime">The window end time.</param>
         /// <returns>The paginated events</returns>
-        public async Task< PaginatedEvents > GetEventsAsync( string objectType, string objectID, string eventType = null, string lastKeyID = null, DateTime? lastKeyTimestamp = null, int? limit = null, DateTime? startTime = null, DateTime? endTime = null ) {
-            if ( objectType == null ) throw new ArgumentNullException( nameof(objectType) );
-            if ( objectID == null ) throw new ArgumentNullException( nameof(objectID) );
-            EnsureAuthenticated();
+        //public async Task< PaginatedEvents > GetEventsAsync( string objectType, string objectID, string eventType = null, string lastKeyID = null, DateTime? lastKeyTimestamp = null, int? limit = null, DateTime? startTime = null, DateTime? endTime = null ) {
+        //    if ( objectType == null ) throw new ArgumentNullException( nameof(objectType) );
+        //    if ( objectID == null ) throw new ArgumentNullException( nameof(objectID) );
+        //    EnsureAuthenticated();
 
-            // Request
-            const string ROUTE = "events";
-            var queryStr = QueryHelpers.AddQueryString( ROUTE, nameof( objectType ), objectType );
-            queryStr = QueryHelpers.AddQueryString( queryStr, nameof( objectID ), objectID );
-            if ( !string.IsNullOrEmpty( eventType ) ) {
-                queryStr = QueryHelpers.AddQueryString( queryStr, nameof( eventType ), eventType );
-            }
-            if ( !string.IsNullOrEmpty( lastKeyID ) ) {
-                queryStr = QueryHelpers.AddQueryString( queryStr, nameof( lastKeyID ), lastKeyID );
-            }
-            if ( lastKeyTimestamp.HasValue ) {
-                var timestamp = lastKeyTimestamp.Value.ToUniversalTime().ToString( Constants.TIMESTAMP_FORMAT );
-                queryStr = QueryHelpers.AddQueryString( queryStr, "lastKeyTS", timestamp );
-            }
-            if ( limit.HasValue ) {
-                queryStr = QueryHelpers.AddQueryString( queryStr, nameof( limit ), limit.ToString() );
-            }
-            if ( startTime.HasValue && endTime.HasValue) {
-                var formattedTimestamp = startTime.Value.ToUniversalTime().ToString( Constants.TIMESTAMP_FORMAT );
-                queryStr = QueryHelpers.AddQueryString( queryStr, "tsStart", formattedTimestamp );
-                formattedTimestamp = endTime.Value.ToUniversalTime().ToString( Constants.TIMESTAMP_FORMAT );
-                queryStr = QueryHelpers.AddQueryString( queryStr, "tsEnd", formattedTimestamp );
-            }
-            var uri = new Uri( queryStr, UriKind.Relative );
-            var request = _client.GetAsync( uri );
+        //    // Request
+        //    const string ROUTE = "events";
+        //    var queryStr = QueryHelpers.AddQueryString( ROUTE, nameof( objectType ), objectType );
+        //    queryStr = QueryHelpers.AddQueryString( queryStr, nameof( objectID ), objectID );
+        //    if ( !string.IsNullOrEmpty( eventType ) ) {
+        //        queryStr = QueryHelpers.AddQueryString( queryStr, nameof( eventType ), eventType );
+        //    }
+        //    if ( !string.IsNullOrEmpty( lastKeyID ) ) {
+        //        queryStr = QueryHelpers.AddQueryString( queryStr, nameof( lastKeyID ), lastKeyID );
+        //    }
+        //    if ( lastKeyTimestamp.HasValue ) {
+        //        var timestamp = lastKeyTimestamp.Value.ToUniversalTime().ToString( Constants.TIMESTAMP_FORMAT );
+        //        queryStr = QueryHelpers.AddQueryString( queryStr, "lastKeyTS", timestamp );
+        //    }
+        //    if ( limit.HasValue ) {
+        //        queryStr = QueryHelpers.AddQueryString( queryStr, nameof( limit ), limit.ToString() );
+        //    }
+        //    if ( startTime.HasValue && endTime.HasValue) {
+        //        var formattedTimestamp = startTime.Value.ToUniversalTime().ToString( Constants.TIMESTAMP_FORMAT );
+        //        queryStr = QueryHelpers.AddQueryString( queryStr, "tsStart", formattedTimestamp );
+        //        formattedTimestamp = endTime.Value.ToUniversalTime().ToString( Constants.TIMESTAMP_FORMAT );
+        //        queryStr = QueryHelpers.AddQueryString( queryStr, "tsEnd", formattedTimestamp );
+        //    }
+        //    var uri = new Uri( queryStr, UriKind.Relative );
+        //    var request = _client.GetAsync( uri );
             
-            // Response
-            var jsonContent = await UnwrapResponseStringAsync( request ).ConfigureAwait( false );
-            var loopEvents = JsonConvert.DeserializeObject< PaginatedEvents >( jsonContent );
-            return loopEvents;
-        }
+        //    // Response
+        //    var jsonContent = await UnwrapResponseStringAsync( request ).ConfigureAwait( false );
+        //    var loopEvents = JsonConvert.DeserializeObject< PaginatedEvents >( jsonContent );
+        //    return loopEvents;
+        //}
 
         /// <summary>
         /// Posts Loop Events asynchronously.
