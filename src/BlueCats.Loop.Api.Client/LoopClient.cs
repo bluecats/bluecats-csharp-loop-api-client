@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net.Http;
@@ -17,12 +18,6 @@ namespace BlueCats.Loop.Api.Client {
     /// </summary>
     public class LoopClient {
 
-        /// <summary>
-        /// Gets a value indicating whether this instance is authenticated.
-        /// </summary>
-        /// <value>
-        ///   <c>true</c> if this instance is authenticated; otherwise, <c>false</c>.
-        /// </value>
         public bool IsAuthenticated => !string.IsNullOrEmpty( _authString );
 
         private readonly HttpClient _client;
@@ -85,7 +80,7 @@ namespace BlueCats.Loop.Api.Client {
         /// <param name="startTime">The window start time.</param>
         /// <param name="endTime">The window end time.</param>
         /// <returns>The paginated events</returns>
-        public async Task<PaginatedEvents> GetEventsAsync(string objectType, string objectID, string eventType = null, string lastKeyID = null, DateTime? lastKeyTimestamp = null, int? limit = null, DateTime? startTime = null, DateTime? endTime = null) {
+        public async Task<PaginatedEvents> GetEventsAsync( string objectType, string objectID, string eventType = null, string lastKeyID = null, DateTime? lastKeyTimestamp = null, int? limit = null, DateTime? startTime = null, DateTime? endTime = null) {
             if (objectType == null) throw new ArgumentNullException(nameof(objectType));
             if (objectID == null) throw new ArgumentNullException(nameof(objectID));
             EnsureAuthenticated();
@@ -148,6 +143,25 @@ namespace BlueCats.Loop.Api.Client {
         }
 
         /// <summary>
+        /// Posts a JSON search query and receives the results in JSON
+        /// </summary>
+        /// <param name="queryJson">The query json.</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException">queryJson</exception>
+        public async Task< string > PostSearchAsync( string queryJson ) {
+            if ( queryJson == null ) throw new ArgumentNullException( nameof(queryJson) );
+            EnsureAuthenticated();
+
+            // Request
+            const string ROUTE = "search";
+            var uri = new Uri( ROUTE, UriKind.Relative );
+            var request = _client.PostAsync( uri, new StringContent( queryJson, Encoding.ASCII, "application/json" ) );
+            
+            // Response
+            return await UnwrapResponseStringAsync( request ).ConfigureAwait( false );
+        }
+
+        /// <summary>
         /// Gets the schema asynchronous.
         /// </summary>
         /// <returns>The Loop API Schema as a JSON string</returns>
@@ -161,6 +175,20 @@ namespace BlueCats.Loop.Api.Client {
             
             // Response
             return await UnwrapResponseStringAsync( request ).ConfigureAwait( false );
+        }
+
+        public Task< Dictionary< string, string > > GetObjectsAsync( object objectType, Guid? groupID = null ) {
+            throw new NotImplementedException();
+        }
+
+        public Task< int > GetObjectCountAsync( string objectType, Guid? groupID = null ) {
+            throw new NotImplementedException();
+        }
+
+        public async Task< ICollection< Group > > GetGroupsAsync() {
+            var groupsJson = await PostSearchAsync( Constants.GROUPS_JSON_QUERY ).ConfigureAwait( false );
+            var groups = JsonConvert.DeserializeObject< ICollection< Group > >( groupsJson );
+            return groups;
         }
 
         private async Task< string > UnwrapResponseStringAsync( Task< HttpResponseMessage > request ) {

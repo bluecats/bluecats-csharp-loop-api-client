@@ -55,11 +55,17 @@
     <Compile Include="..\BlueCats.Loop.Api.Client\Models\EventInfo.cs">
       <Link>Models\EventInfo.cs</Link>
     </Compile>
+    <Compile Include="..\BlueCats.Loop.Api.Client\Models\Group.cs">
+      <Link>Models\Group.cs</Link>
+    </Compile>
     <Compile Include="..\BlueCats.Loop.Api.Client\Models\PaginatedEvents.cs">
       <Link>Models\PaginatedEvents.cs</Link>
     </Compile>
     <Compile Include="..\BlueCats.Loop.Api.Client\Models\User.cs">
       <Link>Models\User.cs</Link>
+    </Compile>
+    <Compile Include="..\BlueCats.Loop.Api.Client\SchemaHelper.cs">
+      <Link>SchemaHelper.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
