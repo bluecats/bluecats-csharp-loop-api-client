@@ -177,12 +177,51 @@ namespace BlueCats.Loop.Api.Client {
             return await UnwrapResponseStringAsync( request ).ConfigureAwait( false );
         }
 
-        public Task< Dictionary< string, string > > GetObjectsAsync( object objectType, Guid? groupID = null ) {
-            throw new NotImplementedException();
+        public async Task< List< Dictionary< string, string > > > GetObjectsAsync( string objectType, string schemaJson, Guid? groupID = null ) {
+            EnsureAuthenticated();
+            // TODO: include group ID
+            // lookup all property keys that I need to include in search query for this particular objectType
+            var schema = JObject.Parse( schemaJson );
+            var objectFields =
+                from key in schema[ "objects" ][ objectType ][ "keys" ]
+                select key[ "name" ];
+
+            // create search query
+            var selectList = (
+                from field in objectFields
+                select new JObject( new JProperty( "value", field ) )
+            ).ToList();
+            selectList.Add( new JObject( new JProperty( "count", "all" ) ) );
+
+            var query = 
+                new JObject( 
+                    new JProperty( "from", objectType ),
+                    new JProperty( "select", 
+                        new JArray( selectList )));
+            var queryJson = query.ToString();
+
+            // API call
+            var objectsJson = await PostSearchAsync( queryJson ).ConfigureAwait( false );
+
+            var objects = JObject.Parse( objectsJson )[ objectType ];
+            var deserializedObjects = objects.ToObject< List< Dictionary< string, string > > >();
+
+            return deserializedObjects;
         }
 
-        public Task< int > GetObjectCountAsync( string objectType, Guid? groupID = null ) {
-            throw new NotImplementedException();
+        public async Task< int > GetObjectCountAsync( string objectType, Guid? groupID = null ) {
+            EnsureAuthenticated();
+            // TODO: include group ID
+            // create search query
+
+            var queryJson = "{\"from\":\"bcdParcel\",\"select\":[{\"count\":\"all\"}]}";
+
+            // send and receive
+            var countJson = await PostSearchAsync( queryJson ).ConfigureAwait( false );
+
+            // parse count
+            var count = (int)JObject.Parse( countJson )[ "count" ];
+            return count;
         }
 
         public async Task< ICollection< Group > > GetGroupsAsync() {
