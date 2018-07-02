@@ -4,11 +4,11 @@ namespace BlueCats.Loop.Api.Client.Models {
 
     public class Group {
 
-        public Guid Id { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
         public string Abbreviation { get; set; }
         public string Type { get; set; }
-        public Guid? ParentId { get; set; }
+        public string ParentId { get; set; }
 
     }
 

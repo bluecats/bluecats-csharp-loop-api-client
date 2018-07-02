@@ -33,7 +33,6 @@ namespace BlueCats.Loop.Api.Client {
             var baseUrl1 = new Uri( baseUrl );
             _client = new HttpClient { BaseAddress = baseUrl1 };
             _client.DefaultRequestHeaders.Accept.Clear();
-            _client.DefaultRequestHeaders.Accept.Add( new MediaTypeWithQualityHeaderValue( "application/json" ) );
             _client.DefaultRequestHeaders.Add( "X-API-HEADER", "1" );
         }
 
@@ -48,13 +47,16 @@ namespace BlueCats.Loop.Api.Client {
             if ( email == null ) throw new ArgumentNullException( nameof(email) );
             if ( password == null ) throw new ArgumentNullException( nameof(password) );
 
+            if ( IsAuthenticated ) {
+                _client.DefaultRequestHeaders.Remove( "Authorization" );
+                _authString = null;
+            }
+
             // Request
             // Create json string from a C# Anonymous Class and JObject to serialize
             var json = JObject.FromObject( new { email, password } ).ToString();
-            var jsonBytes = Encoding.ASCII.GetBytes( json );
-            var content = new ByteArrayContent( jsonBytes );
             var route = new Uri( "login", UriKind.Relative );
-            var request = _client.PostAsync( route, content );
+            var request = _client.PostAsync( route, new StringContent( json, Encoding.ASCII, "application/json" ) );
 
             // Response
             var jsonContent = await UnwrapResponseStringAsync( request ).ConfigureAwait( false );
@@ -142,12 +144,11 @@ namespace BlueCats.Loop.Api.Client {
             return await UnwrapResponseStringAsync( request ).ConfigureAwait( false );
         }
 
-        /// <summary>
-        /// Posts a JSON search query and receives the results in JSON
-        /// </summary>
-        /// <param name="queryJson">The query json.</param>
-        /// <returns></returns>
-        /// <exception cref="ArgumentNullException">queryJson</exception>
+        /// <summary> 
+        /// Allows for a custom JSON search query to pull specific data from the Loop API. This is mainly used under-the-hood by other methods in this class. 
+        /// </summary> 
+        /// <param name="queryJson">The JSON for the Loop API query. See the Loop docs online for how to format this query.</param> 
+        /// <returns>The result of the query as a JSON string</returns> 
         public async Task< string > PostSearchAsync( string queryJson ) {
             if ( queryJson == null ) throw new ArgumentNullException( nameof(queryJson) );
             EnsureAuthenticated();
@@ -177,16 +178,16 @@ namespace BlueCats.Loop.Api.Client {
             return await UnwrapResponseStringAsync( request ).ConfigureAwait( false );
         }
 
-        public async Task< List< Dictionary< string, string > > > GetObjectsAsync( string objectType, string schemaJson, Guid? groupID = null ) {
+        public async Task< List< Dictionary< string, string > > > GetObjectsAsync( string objectType, string schemaJson, string groupId = null ) {
             EnsureAuthenticated();
             // TODO: include group ID
-            // lookup all property keys that I need to include in search query for this particular objectType
+            // Lookup all property keys that I need to include in search query for this particular objectType
             var schema = JObject.Parse( schemaJson );
             var objectFields =
                 from key in schema[ "objects" ][ objectType ][ "keys" ]
                 select key[ "name" ];
 
-            // create search query
+            // Create search query
             var selectList = (
                 from field in objectFields
                 select new JObject( new JProperty( "value", field ) )
@@ -198,6 +199,17 @@ namespace BlueCats.Loop.Api.Client {
                     new JProperty( "from", objectType ),
                     new JProperty( "select", 
                         new JArray( selectList )));
+
+            // Add "where" clause for GroupID if supplied
+            if ( groupId != null ) {
+                query.Add( "where", 
+                    new JArray(
+                        new JObject( 
+                            new JProperty( "groupID",
+                                new JObject( 
+                                    new JProperty( "EQ", groupId.ToLower() ))))));
+            }
+
             var queryJson = query.ToString();
 
             // API call
@@ -209,12 +221,28 @@ namespace BlueCats.Loop.Api.Client {
             return deserializedObjects;
         }
 
-        public async Task< int > GetObjectCountAsync( string objectType, Guid? groupID = null ) {
+        public async Task< int > GetObjectCountAsync( string objectType, string groupID = null ) {
             EnsureAuthenticated();
             // TODO: include group ID
             // create search query
+            var query = 
+                new JObject( 
+                    new JProperty( "from", objectType ),
+                    new JProperty( "select", 
+                        new JArray( 
+                            new JObject( 
+                                new JProperty( "count", "all" )))));
 
-            var queryJson = "{\"from\":\"bcdParcel\",\"select\":[{\"count\":\"all\"}]}";
+            // Add "where" clause for GroupID if supplied
+            if ( groupID != null ) {
+                query.Add( "where", 
+                    new JArray(
+                        new JObject( 
+                            new JProperty( "groupID",
+                                new JObject( 
+                                    new JProperty( "EQ", groupID.ToLower() ))))));
+            }
+            var queryJson = query.ToString();
 
             // send and receive
             var countJson = await PostSearchAsync( queryJson ).ConfigureAwait( false );
@@ -225,8 +253,9 @@ namespace BlueCats.Loop.Api.Client {
         }
 
         public async Task< ICollection< Group > > GetGroupsAsync() {
-            var groupsJson = await PostSearchAsync( Constants.GROUPS_JSON_QUERY ).ConfigureAwait( false );
-            var groups = JsonConvert.DeserializeObject< ICollection< Group > >( groupsJson );
+            var groupsJson = await PostSearchAsync( Constants.GROUPS_QUERY ).ConfigureAwait( false );
+            var groupsJObject = JObject.Parse( groupsJson )[ "groups" ];
+            var groups = groupsJObject.ToObject< ICollection< Group > >();
             return groups;
         }
 
