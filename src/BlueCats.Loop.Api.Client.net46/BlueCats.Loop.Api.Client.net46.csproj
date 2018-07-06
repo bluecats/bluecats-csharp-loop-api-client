@@ -40,31 +40,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\BlueCats.Loop.Api.Client\LoopClient.cs">
+    <Compile Include="..\BlueCats.Loop.Api.Client.netstandard20\LoopClient.cs">
       <Link>LoopClient.cs</Link>
     </Compile>
-    <Compile Include="..\BlueCats.Loop.Api.Client\Models\Constants.cs">
+    <Compile Include="..\BlueCats.Loop.Api.Client.netstandard20\Models\Constants.cs">
       <Link>Models\Constants.cs</Link>
     </Compile>
-    <Compile Include="..\BlueCats.Loop.Api.Client\Models\Event.cs">
+    <Compile Include="..\BlueCats.Loop.Api.Client.netstandard20\Models\Event.cs">
       <Link>Models\Event.cs</Link>
     </Compile>
-    <Compile Include="..\BlueCats.Loop.Api.Client\Models\EventIdentifierType.cs">
+    <Compile Include="..\BlueCats.Loop.Api.Client.netstandard20\Models\EventIdentifierType.cs">
       <Link>Models\EventIdentifierType.cs</Link>
     </Compile>
-    <Compile Include="..\BlueCats.Loop.Api.Client\Models\EventInfo.cs">
+    <Compile Include="..\BlueCats.Loop.Api.Client.netstandard20\Models\EventInfo.cs">
       <Link>Models\EventInfo.cs</Link>
     </Compile>
-    <Compile Include="..\BlueCats.Loop.Api.Client\Models\Group.cs">
+    <Compile Include="..\BlueCats.Loop.Api.Client.netstandard20\Models\Group.cs">
       <Link>Models\Group.cs</Link>
     </Compile>
-    <Compile Include="..\BlueCats.Loop.Api.Client\Models\PaginatedEvents.cs">
+    <Compile Include="..\BlueCats.Loop.Api.Client.netstandard20\Models\PaginatedEvents.cs">
       <Link>Models\PaginatedEvents.cs</Link>
     </Compile>
-    <Compile Include="..\BlueCats.Loop.Api.Client\Models\User.cs">
+    <Compile Include="..\BlueCats.Loop.Api.Client.netstandard20\Models\User.cs">
       <Link>Models\User.cs</Link>
     </Compile>
-    <Compile Include="..\BlueCats.Loop.Api.Client\SchemaHelper.cs">
+    <Compile Include="..\BlueCats.Loop.Api.Client.netstandard20\SchemaHelper.cs">
       <Link>SchemaHelper.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
