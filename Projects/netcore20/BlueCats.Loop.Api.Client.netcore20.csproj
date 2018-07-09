@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\Src\LoopClient.cs" Link="LoopClient.cs" />
+    <Compile Include="..\..\Src\Models\Constants.cs" Link="Models\Constants.cs" />
+    <Compile Include="..\..\Src\Models\Event.cs" Link="Models\Event.cs" />
+    <Compile Include="..\..\Src\Models\EventIdentifierType.cs" Link="Models\EventIdentifierType.cs" />
+    <Compile Include="..\..\Src\Models\EventInfo.cs" Link="Models\EventInfo.cs" />
+    <Compile Include="..\..\Src\Models\Group.cs" Link="Models\Group.cs" />
+    <Compile Include="..\..\Src\Models\ObjectTypeInfo.cs" Link="Models\ObjectTypeInfo.cs" />
+    <Compile Include="..\..\Src\Models\PaginatedEvents.cs" Link="Models\PaginatedEvents.cs" />
+    <Compile Include="..\..\Src\Models\User.cs" Link="Models\User.cs" />
+    <Compile Include="..\..\Src\SchemaHelper.cs" Link="SchemaHelper.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="2.1.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+  </ItemGroup>
+
+</Project>

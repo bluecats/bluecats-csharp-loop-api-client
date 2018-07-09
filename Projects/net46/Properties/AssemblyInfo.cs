@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("BlueCats.Loop.Api.Client")]
+[assembly: AssemblyTitle("BlueCats.Loop.Api.Client.net46")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("BlueCats.Loop.Api.Client")]
+[assembly: AssemblyProduct("BlueCats.Loop.Api.Client.net46")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("278c3035-f2c7-4e98-a866-7989e4f3bf9f")]
+[assembly: Guid("a4ff466c-8c12-4805-9c6f-ab15a7e54a7b")]
 
 // Version information for an assembly consists of the following four values:
 //

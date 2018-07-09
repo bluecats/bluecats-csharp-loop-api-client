@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{278C3035-F2C7-4E98-A866-7989E4F3BF9F}</ProjectGuid>
+    <ProjectGuid>{A4FF466C-8C12-4805-9C6F-AB15A7E54A7B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BlueCats.Loop.Api.Client</RootNamespace>
-    <AssemblyName>BlueCats.Loop.Api.Client</AssemblyName>
+    <RootNamespace>BlueCats.Loop.Api.Client.net46</RootNamespace>
+    <AssemblyName>BlueCats.Loop.Api.Client.net46</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,31 +40,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\BlueCats.Loop.Api.Client.netstandard20\LoopClient.cs">
+    <Compile Include="..\..\Src\LoopClient.cs">
       <Link>LoopClient.cs</Link>
     </Compile>
-    <Compile Include="..\BlueCats.Loop.Api.Client.netstandard20\Models\Constants.cs">
+    <Compile Include="..\..\Src\Models\Constants.cs">
       <Link>Models\Constants.cs</Link>
     </Compile>
-    <Compile Include="..\BlueCats.Loop.Api.Client.netstandard20\Models\Event.cs">
+    <Compile Include="..\..\Src\Models\Event.cs">
       <Link>Models\Event.cs</Link>
     </Compile>
-    <Compile Include="..\BlueCats.Loop.Api.Client.netstandard20\Models\EventIdentifierType.cs">
+    <Compile Include="..\..\Src\Models\EventIdentifierType.cs">
       <Link>Models\EventIdentifierType.cs</Link>
     </Compile>
-    <Compile Include="..\BlueCats.Loop.Api.Client.netstandard20\Models\EventInfo.cs">
+    <Compile Include="..\..\Src\Models\EventInfo.cs">
       <Link>Models\EventInfo.cs</Link>
     </Compile>
-    <Compile Include="..\BlueCats.Loop.Api.Client.netstandard20\Models\Group.cs">
+    <Compile Include="..\..\Src\Models\Group.cs">
       <Link>Models\Group.cs</Link>
     </Compile>
-    <Compile Include="..\BlueCats.Loop.Api.Client.netstandard20\Models\PaginatedEvents.cs">
+    <Compile Include="..\..\Src\Models\ObjectTypeInfo.cs">
+      <Link>Models\ObjectTypeInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Src\Models\PaginatedEvents.cs">
       <Link>Models\PaginatedEvents.cs</Link>
     </Compile>
-    <Compile Include="..\BlueCats.Loop.Api.Client.netstandard20\Models\User.cs">
+    <Compile Include="..\..\Src\Models\User.cs">
       <Link>Models\User.cs</Link>
     </Compile>
-    <Compile Include="..\BlueCats.Loop.Api.Client.netstandard20\SchemaHelper.cs">
+    <Compile Include="..\..\Src\SchemaHelper.cs">
       <Link>SchemaHelper.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
