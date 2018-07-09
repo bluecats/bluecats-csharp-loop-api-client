@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Models\git_placeholder.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Include="..\netstandard20\LoopClient.cs" Link="LoopClient.cs" />
     <Compile Include="..\netstandard20\Models\Constants.cs" Link="Models\Constants.cs" />
     <Compile Include="..\netstandard20\Models\Event.cs" Link="Models\Event.cs" />
