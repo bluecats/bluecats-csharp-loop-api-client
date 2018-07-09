@@ -40,34 +40,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\Src\LoopClient.cs">
+    <Compile Include="..\netstandard20\LoopClient.cs">
       <Link>LoopClient.cs</Link>
     </Compile>
-    <Compile Include="..\..\Src\Models\Constants.cs">
+    <Compile Include="..\netstandard20\Models\Constants.cs">
       <Link>Models\Constants.cs</Link>
     </Compile>
-    <Compile Include="..\..\Src\Models\Event.cs">
+    <Compile Include="..\netstandard20\Models\Event.cs">
       <Link>Models\Event.cs</Link>
     </Compile>
-    <Compile Include="..\..\Src\Models\EventIdentifierType.cs">
+    <Compile Include="..\netstandard20\Models\EventIdentifierType.cs">
       <Link>Models\EventIdentifierType.cs</Link>
     </Compile>
-    <Compile Include="..\..\Src\Models\EventInfo.cs">
+    <Compile Include="..\netstandard20\Models\EventInfo.cs">
       <Link>Models\EventInfo.cs</Link>
     </Compile>
-    <Compile Include="..\..\Src\Models\Group.cs">
+    <Compile Include="..\netstandard20\Models\Group.cs">
       <Link>Models\Group.cs</Link>
     </Compile>
-    <Compile Include="..\..\Src\Models\ObjectTypeInfo.cs">
+    <Compile Include="..\netstandard20\Models\ObjectTypeInfo.cs">
       <Link>Models\ObjectTypeInfo.cs</Link>
     </Compile>
-    <Compile Include="..\..\Src\Models\PaginatedEvents.cs">
+    <Compile Include="..\netstandard20\Models\PaginatedEvents.cs">
       <Link>Models\PaginatedEvents.cs</Link>
     </Compile>
-    <Compile Include="..\..\Src\Models\User.cs">
+    <Compile Include="..\netstandard20\Models\User.cs">
       <Link>Models\User.cs</Link>
     </Compile>
-    <Compile Include="..\..\Src\SchemaHelper.cs">
+    <Compile Include="..\netstandard20\SchemaHelper.cs">
       <Link>SchemaHelper.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -80,5 +80,6 @@
       <Version>11.0.2</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
