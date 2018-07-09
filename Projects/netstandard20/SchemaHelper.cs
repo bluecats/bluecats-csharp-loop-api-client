@@ -15,7 +15,7 @@ namespace BlueCats.Loop.Api.Client {
             return objectTypes;
         }
 
-        public static ICollection< ObjectTypeInfo > GetObjectTypeInfo( string schemaJson, string objectType ) {
+        public static ICollection< ObjectTypePropertyInfo > GetObjectTypeInfo( string schemaJson, string objectType ) {
             return null;
         }
 

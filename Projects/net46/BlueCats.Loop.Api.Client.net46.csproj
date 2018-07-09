@@ -61,6 +61,9 @@
     <Compile Include="..\netstandard20\Models\ObjectTypeInfo.cs">
       <Link>Models\ObjectTypeInfo.cs</Link>
     </Compile>
+    <Compile Include="..\netstandard20\Models\ObjectTypePropertyInfo.cs">
+      <Link>Models\ObjectTypePropertyInfo.cs</Link>
+    </Compile>
     <Compile Include="..\netstandard20\Models\PaginatedEvents.cs">
       <Link>Models\PaginatedEvents.cs</Link>
     </Compile>

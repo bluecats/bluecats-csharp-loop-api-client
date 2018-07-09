@@ -12,6 +12,7 @@
     <Compile Include="..\netstandard20\Models\EventInfo.cs" Link="Models\EventInfo.cs" />
     <Compile Include="..\netstandard20\Models\Group.cs" Link="Models\Group.cs" />
     <Compile Include="..\netstandard20\Models\ObjectTypeInfo.cs" Link="Models\ObjectTypeInfo.cs" />
+    <Compile Include="..\netstandard20\Models\ObjectTypePropertyInfo.cs" Link="Models\ObjectTypePropertyInfo.cs" />
     <Compile Include="..\netstandard20\Models\PaginatedEvents.cs" Link="Models\PaginatedEvents.cs" />
     <Compile Include="..\netstandard20\Models\User.cs" Link="Models\User.cs" />
     <Compile Include="..\netstandard20\SchemaHelper.cs" Link="SchemaHelper.cs" />
@@ -20,10 +21,6 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="2.1.1" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Models\" />
   </ItemGroup>
 
 </Project>
