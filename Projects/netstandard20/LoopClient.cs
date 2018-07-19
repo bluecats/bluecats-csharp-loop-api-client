@@ -70,19 +70,31 @@ namespace BlueCats.Loop.Api.Client {
             return user;
         }
 
-        /// <summary>
-        /// Gets the paginated Loop Events asynchronously.
-        /// </summary>
-        /// <param name="objectType">Type of the Loop Object.</param>
-        /// <param name="objectID">The Loop Object identifier.</param>
-        /// <param name="eventType">Type of the Loop Event.</param>
-        /// <param name="lastKeyID">The identifier for the key of the page to start on.</param>
-        /// <param name="lastKeyTimestamp">The timestamp of the page to start on.</param>
-        /// <param name="limit">The Page limit.</param>
-        /// <param name="startTime">The window start time.</param>
-        /// <param name="endTime">The window end time.</param>
-        /// <returns>The paginated events</returns>
-        public async Task<PaginatedEvents> GetEventsAsync( string objectType, string objectID, string eventType = null, string lastKeyID = null, DateTime? lastKeyTimestamp = null, int? limit = null, DateTime? startTime = null, DateTime? endTime = null) {
+		/// <summary>
+		/// Logs Out and clears the current session and auth details.
+		/// </summary>
+		public void Logout() {
+
+			_client.DefaultRequestHeaders.Remove( "Authorization" );
+			_authString = string.Empty;
+
+			// Ultimtely we should send an event to the cloud if required?
+
+		}
+
+		/// <summary>
+		/// Gets the paginated Loop Events asynchronously.
+		/// </summary>
+		/// <param name="objectType">Type of the Loop Object.</param>
+		/// <param name="objectID">The Loop Object identifier.</param>
+		/// <param name="eventType">Type of the Loop Event.</param>
+		/// <param name="lastKeyID">The identifier for the key of the page to start on.</param>
+		/// <param name="lastKeyTimestamp">The timestamp of the page to start on.</param>
+		/// <param name="limit">The Page limit.</param>
+		/// <param name="startTime">The window start time.</param>
+		/// <param name="endTime">The window end time.</param>
+		/// <returns>The paginated events</returns>
+		public async Task<PaginatedEvents> GetEventsAsync( string objectType, string objectID, string eventType = null, string lastKeyID = null, DateTime? lastKeyTimestamp = null, int? limit = null, DateTime? startTime = null, DateTime? endTime = null) {
             if (objectType == null) throw new ArgumentNullException(nameof(objectType));
             if (objectID == null) throw new ArgumentNullException(nameof(objectID));
             EnsureAuthenticated();
