@@ -1,4 +1,4 @@
-﻿namespace BlueCats.Loop.Api.Client.Models {
+﻿namespace BC.Loop.Api.Client.Models {
 
     public class ObjectTypePropertyInfo {
 

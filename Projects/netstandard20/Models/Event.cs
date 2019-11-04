@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BlueCats.Loop.Api.Client.Models {
+namespace BC.Loop.Api.Client.Models {
 
     /// <summary>
     /// A Loop Event

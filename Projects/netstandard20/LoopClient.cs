@@ -6,12 +6,12 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using BlueCats.Loop.Api.Client.Models;
+using BC.Loop.Api.Client.Models;
 using Microsoft.AspNetCore.WebUtilities;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace BlueCats.Loop.Api.Client {
+namespace BC.Loop.Api.Client {
 
     /// <summary>
     /// Provides an async interface to the BlueCats Loop web API 

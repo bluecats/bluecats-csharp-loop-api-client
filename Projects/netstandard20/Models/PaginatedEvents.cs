@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 
-namespace BlueCats.Loop.Api.Client.Models {
+namespace BC.Loop.Api.Client.Models {
 
     public class PaginatedEvents {
 

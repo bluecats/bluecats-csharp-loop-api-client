@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyName>BlueCats.Loop.Api.Client</AssemblyName>
+    <AssemblyName>BC.Loop.Api.Client</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

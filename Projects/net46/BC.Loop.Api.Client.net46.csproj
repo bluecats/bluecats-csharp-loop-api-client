@@ -7,8 +7,8 @@
     <ProjectGuid>{A4FF466C-8C12-4805-9C6F-AB15A7E54A7B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BlueCats.Loop.Api.Client.net46</RootNamespace>
-    <AssemblyName>BlueCats.Loop.Api.Client.net46</AssemblyName>
+    <RootNamespace>BC.Loop.Api.Client.net46</RootNamespace>
+    <AssemblyName>BC.Loop.Api.Client.net46</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

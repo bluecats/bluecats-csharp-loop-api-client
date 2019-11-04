@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using BlueCats.Loop.Api.Client.Models;
+using BC.Loop.Api.Client.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace BlueCats.Loop.Api.Client {
+namespace BC.Loop.Api.Client {
 
     public static class SchemaHelper {
 
