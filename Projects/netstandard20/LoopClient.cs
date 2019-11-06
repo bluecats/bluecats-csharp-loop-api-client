@@ -16,9 +16,9 @@ namespace BC.Loop.Api.Client {
     /// <summary>
     /// Provides an async interface to the BlueCats Loop web API 
     /// </summary>
-    public class LoopClient {
+    public class LoopClient: ILoopClient {
 
-        public bool IsAuthenticated => !string.IsNullOrEmpty( _authString );
+        public bool IsAuthenticated() => !string.IsNullOrEmpty( _authString );
 
         private readonly HttpClient _client;
         private string _authString;
@@ -47,7 +47,7 @@ namespace BC.Loop.Api.Client {
             if ( email == null ) throw new ArgumentNullException( nameof(email) );
             if ( password == null ) throw new ArgumentNullException( nameof(password) );
 
-            if ( IsAuthenticated ) {
+            if ( IsAuthenticated() ) {
                 _client.DefaultRequestHeaders.Remove( "Authorization" );
                 _authString = null;
             }
@@ -292,7 +292,7 @@ namespace BC.Loop.Api.Client {
         }
 
         private void EnsureAuthenticated() {
-            if ( !IsAuthenticated ) throw new Exception( "Must login before API request" );
+            if ( !IsAuthenticated() ) throw new Exception( "Must login before API request" );
         }
 
     }
