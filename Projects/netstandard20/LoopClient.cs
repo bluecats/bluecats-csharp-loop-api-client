@@ -59,15 +59,19 @@ namespace BC.Loop.Api.Client {
             var request = _client.PostAsync( route, new StringContent( json, Encoding.ASCII, "application/json" ) );
 
             // Response
-            var jsonContent = await UnwrapResponseStringAsync( request ).ConfigureAwait( false );
-            var jsonObj = JObject.Parse( jsonContent );
-            _authString = (string) jsonObj["auth"];
-            if ( string.IsNullOrEmpty( _authString ) ) {
-                throw new Exception( "Received an empty auth token from API" );
+            var response = await UnwrapResponseStringAsync( request ).ConfigureAwait( false );
+            try {
+                var jsonObj = JObject.Parse( response );
+                _authString = (string)jsonObj[ "auth" ];
+                if (string.IsNullOrEmpty( _authString )) {
+                    throw new Exception( "Received an empty auth token from API" );
+                }
+                _client.DefaultRequestHeaders.Add( "Authorization", _authString );
+                var user = JsonConvert.DeserializeObject<User>( response );
+                return user;
+            } catch {
+                throw new Exception( response );
             }
-            _client.DefaultRequestHeaders.Add( "Authorization", _authString );
-            var user = JsonConvert.DeserializeObject< User >( jsonContent );
-            return user;
         }
 
 		/// <summary>
@@ -275,7 +279,7 @@ namespace BC.Loop.Api.Client {
             HttpResponseMessage response = null;
             try {
                 response = await request.ConfigureAwait( false );
-                response.EnsureSuccessStatusCode();
+                //response.EnsureSuccessStatusCode();
                 var content = await response.Content.ReadAsStringAsync().ConfigureAwait( false );
                 return content;
             }
