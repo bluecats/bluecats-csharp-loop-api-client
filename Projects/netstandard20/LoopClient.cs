@@ -173,9 +173,10 @@ namespace BC.Loop.Api.Client {
             const string ROUTE = "search";
             var uri = new Uri( ROUTE, UriKind.Relative );
             var request = _client.PostAsync( uri, new StringContent( queryJson, Encoding.ASCII, "application/json" ) );
-            
-            // Response
-            return await UnwrapResponseStringAsync( request ).ConfigureAwait( false );
+
+
+            var response = await UnwrapResponseStringAsync( request ).ConfigureAwait( false );
+            return response;
         }
 
         /// <summary>
