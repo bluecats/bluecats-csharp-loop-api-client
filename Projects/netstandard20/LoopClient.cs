@@ -174,7 +174,6 @@ namespace BC.Loop.Api.Client {
             var uri = new Uri( ROUTE, UriKind.Relative );
             var request = _client.PostAsync( uri, new StringContent( queryJson, Encoding.ASCII, "application/json" ) );
 
-
             var response = await UnwrapResponseStringAsync( request ).ConfigureAwait( false );
             return response;
         }
