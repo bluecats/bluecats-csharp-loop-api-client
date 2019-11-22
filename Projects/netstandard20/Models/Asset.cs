@@ -12,6 +12,7 @@ namespace BC.Loop.Api.Client.Models {
         public String EddystoneUID { get; set; }
         public String AssetIdentifier { get; set; }
         public String Description { get; set; }
+        public String Type { get; set; }
         public List<Association> Associations { get; set; }
 
         public Asset() {
