@@ -63,6 +63,20 @@ namespace BC.Loop.Api.Client {
         /// <returns>The result of the query as a JSON string</returns> 
         Task<string> PostSearchAsync(string queryJson);
 
+        /// <summary> 
+        /// Creates a new Loop Object
+        /// </summary> 
+        /// <param name="jsonObject">The JSON for the Loop Object. See the Loop docs online for how to format this.</param> 
+        /// <returns>ThThe result of the query as a JSON string</returns> 
+        Task<string> CreateObjectAsync(string jsonObject);
+
+        /// <summary> 
+        /// Updates an existing Loop Object
+        /// </summary> 
+        /// <param name="jsonObject">The JSON for the Loop Object. See the Loop docs online for how to format this.</param> 
+        /// <returns>ThThe result of the query as a JSON string</returns> 
+        Task<string> UpdateObjectAsync(string jsonObject);
+
         /// <summary>
         /// Gets the schema asynchronous.
         /// </summary>

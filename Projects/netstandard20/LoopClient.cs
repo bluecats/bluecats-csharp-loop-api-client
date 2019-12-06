@@ -7,6 +7,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using BC.Loop.Api.Client.Models;
+using BC.Loop.Api.Client.netstandard20;
 using Microsoft.AspNetCore.WebUtilities;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -173,6 +174,42 @@ namespace BC.Loop.Api.Client {
             const string ROUTE = "search";
             var uri = new Uri( ROUTE, UriKind.Relative );
             var request = _client.PostAsync( uri, new StringContent( queryJson, Encoding.ASCII, "application/json" ) );
+
+            var response = await UnwrapResponseStringAsync( request ).ConfigureAwait( false );
+            return response;
+        }
+
+        /// <summary> 
+        /// Creates a new Loop Object
+        /// </summary> 
+        /// <param name="jsonObject">The JSON for the Loop Object. See the Loop docs online for how to format this.</param> 
+        /// <returns>The result of the request as a JSON string</returns> 
+        public async Task<string> CreateObjectAsync(string jsonObject) {
+            if (jsonObject == null) throw new ArgumentNullException( nameof( jsonObject ) );
+            EnsureAuthenticated();
+
+            // Request
+            const string ROUTE = "objects";
+            var uri = new Uri( ROUTE, UriKind.Relative );
+            var request = _client.PostAsync( uri, new StringContent( jsonObject, Encoding.ASCII, "application/json" ) );
+
+            var response = await UnwrapResponseStringAsync( request ).ConfigureAwait( false );
+            return response;
+        }
+
+        /// <summary> 
+        /// Creates a new Loop Object
+        /// </summary> 
+        /// <param name="jsonObject">The JSON for the Loop Object. See the Loop docs online for how to format this.</param> 
+        /// <returns>The result of the request as a JSON string</returns> 
+        public async Task<string> UpdateObjectAsync(string jsonObject) {
+            if (jsonObject == null) throw new ArgumentNullException( nameof( jsonObject ) );
+            EnsureAuthenticated();
+
+            // Request
+            const string ROUTE = "objects";
+            var uri = new Uri( ROUTE, UriKind.Relative );
+            var request = _client.PatchAsync( uri, new StringContent( jsonObject, Encoding.ASCII, "application/json" ) );
 
             var response = await UnwrapResponseStringAsync( request ).ConfigureAwait( false );
             return response;
