@@ -15,7 +15,7 @@ namespace BC.Loop.Api.Client.Models {
         public String Type { get; set; }
         public Double Lat { get; set; }
         public Double Long { get; set; }
-        public List<Association> Associations { get; set; }
+        public List<Asset> Associations { get; set; }
         public DateTime PositionObservedAt { get; set; }
         public DateTime TempObservedAt { get; set; }
         public DateTime MovingObservedAt { get; set; }
@@ -25,7 +25,7 @@ namespace BC.Loop.Api.Client.Models {
         public DateTime BatterySoCObservedAt { get; set; }
 
         public Asset() {
-            Associations = new List<Association>();
+            Associations = new List<Asset>();
         }
 
         public string LastHeard {
