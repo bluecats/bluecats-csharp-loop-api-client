@@ -54,7 +54,7 @@ namespace BC.Loop.Api.Client {
         /// <param name="edgeMac">The MAC Address of the Edge Relay that generated the events.</param>
         /// <param name="eventInfos">The events to post.</param>
         /// <returns>The response string from the request</returns>
-        Task<string> PostEventsAsync(string edgeMac, params EventInfo[] eventInfos);
+        Task<string> PostEventsAsync(string jsonEvents);
 
         /// <summary> 
         /// Allows for a custom JSON search query to pull specific data from the Loop API. This is mainly used under-the-hood by other methods in this class. 

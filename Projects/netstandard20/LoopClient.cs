@@ -142,20 +142,14 @@ namespace BC.Loop.Api.Client {
         /// <param name="edgeMac">The MAC Address of the Edge Relay that generated the events.</param>
         /// <param name="eventInfos">The events to post.</param>
         /// <returns>The response string from the request</returns>
-        public async Task< string > PostEventsAsync( string edgeMac, params EventInfo[] eventInfos ) {
-            if ( edgeMac == null ) throw new ArgumentNullException( nameof(edgeMac) );
-            if ( eventInfos == null ) throw new ArgumentNullException( nameof(eventInfos) );
+        public async Task< string > PostEventsAsync( string jsonEvents ) {
+            if (jsonEvents == null ) throw new ArgumentNullException( nameof( jsonEvents ) );
             EnsureAuthenticated();
 
             // Request
             const string ROUTE = "events";
             var uri = new Uri( ROUTE, UriKind.Relative );
-            var jObject = JObject.FromObject( new {
-                edgeMAC = edgeMac,
-                events = from e in eventInfos select e.EventData
-            } );
-            var json = JsonConvert.SerializeObject( jObject );
-            var request = _client.PostAsync( uri, new StringContent( json, Encoding.ASCII, "application/json" ) );
+            var request = _client.PostAsync( uri, new StringContent( jsonEvents, Encoding.ASCII, "application/json" ) );
             
             // Response
             return await UnwrapResponseStringAsync( request ).ConfigureAwait( false );
