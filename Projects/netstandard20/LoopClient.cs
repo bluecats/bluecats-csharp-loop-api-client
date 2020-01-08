@@ -99,7 +99,7 @@ namespace BC.Loop.Api.Client {
 		/// <param name="startTime">The window start time.</param>
 		/// <param name="endTime">The window end time.</param>
 		/// <returns>The paginated events</returns>
-		public async Task<PaginatedEvents> GetEventsAsync( string objectType, string objectID, string eventType = null, string lastKeyID = null, DateTime? lastKeyTimestamp = null, int? limit = null, DateTime? startTime = null, DateTime? endTime = null) {
+		public async Task<string> GetEventsAsync( string objectType, string objectID, string eventType = null, string lastKeyID = null, DateTime? lastKeyTimestamp = null, int? limit = null, DateTime? startTime = null, DateTime? endTime = null) {
             if (objectType == null) throw new ArgumentNullException(nameof(objectType));
             if (objectID == null) throw new ArgumentNullException(nameof(objectID));
             EnsureAuthenticated();
@@ -130,10 +130,14 @@ namespace BC.Loop.Api.Client {
             var uri = new Uri(queryStr, UriKind.Relative);
             var request = _client.GetAsync(uri);
 
+            return await UnwrapResponseStringAsync( request ).ConfigureAwait( false );
+
+            /*
             // Response
             var jsonContent = await UnwrapResponseStringAsync(request).ConfigureAwait(false);
             var loopEvents = JsonConvert.DeserializeObject<PaginatedEvents>(jsonContent);
             return loopEvents;
+            */
         }
 
         /// <summary>

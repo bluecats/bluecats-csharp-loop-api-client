@@ -46,7 +46,7 @@ namespace BC.Loop.Api.Client {
         /// <param name="startTime">The window start time.</param>
         /// <param name="endTime">The window end time.</param>
         /// <returns>The paginated events</returns>
-        Task<PaginatedEvents> GetEventsAsync(string objectType, string objectID, string eventType = null, string lastKeyID = null, DateTime? lastKeyTimestamp = null, int? limit = null, DateTime? startTime = null, DateTime? endTime = null);
+        Task<string> GetEventsAsync(string objectType, string objectID, string eventType = null, string lastKeyID = null, DateTime? lastKeyTimestamp = null, int? limit = null, DateTime? startTime = null, DateTime? endTime = null);
 
         /// <summary>
         /// Posts Loop Events asynchronously.

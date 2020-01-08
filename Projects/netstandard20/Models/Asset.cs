@@ -6,15 +6,17 @@ namespace BC.Loop.Api.Client.Models {
 
     public class Asset {
 
-        public String ID { get; set; }
-        public String GroupID { get; set; }
-        public String ObjectType { get; set; }
-        public String TagID { get; set; }
-        public String AssetIdentifier { get; set; }
-        public String Description { get; set; }
-        public String Type { get; set; }
-        public Double Lat { get; set; }
-        public Double Long { get; set; }
+        public string ID { get; set; }
+        public string GroupID { get; set; }
+        public string ObjectType { get; set; }
+        public string TagID { get; set; }
+        public string AssetIdentifier { get; set; }
+        public string Description { get; set; }
+        public string Type { get; set; }
+        public double Lat { get; set; }
+        public double Long { get; set; }
+        public float Temp { get; set; }
+        public int BatterySoC { get; set; }
         public List<Asset> Associations { get; set; }
         public DateTime PositionObservedAt { get; set; }
         public DateTime TempObservedAt { get; set; }
@@ -26,34 +28,6 @@ namespace BC.Loop.Api.Client.Models {
 
         public Asset() {
             Associations = new List<Asset>();
-        }
-
-        public string LastHeard {
-            get {
-                var lastHeard = PositionObservedAt;
-                if (TempObservedAt.CompareTo( lastHeard ) > 0) {
-                    lastHeard = TempObservedAt;
-                }
-                if (MovingObservedAt.CompareTo( lastHeard ) > 0) {
-                    lastHeard = MovingObservedAt;
-                }
-                if (BattVObservedAt.CompareTo( lastHeard ) > 0) {
-                    lastHeard = BattVObservedAt;
-                }
-                if (SiteChangedAt.CompareTo( lastHeard ) > 0) {
-                    lastHeard = SiteChangedAt;
-                }
-                if (ZoneChangedAt.CompareTo( lastHeard ) > 0) {
-                    lastHeard = ZoneChangedAt;
-                }
-                if (BatterySoCObservedAt.CompareTo( lastHeard ) > 0) {
-                    lastHeard = BatterySoCObservedAt;
-                }
-                if (lastHeard == DateTime.MinValue) {
-                    return "--";
-                }
-                return lastHeard.ToString( "HH:mm dd MMM yyyy", CultureInfo.CurrentCulture );
-            }
         }
 
     }
