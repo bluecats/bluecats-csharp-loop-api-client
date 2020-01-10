@@ -11,12 +11,14 @@ using Microsoft.AspNetCore.WebUtilities;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace BC.Loop.Api.Client {
+namespace BC.Loop.Api.Client
+{
 
     /// <summary>
     /// Provides an async interface to the BlueCats Loop web API 
     /// </summary>
-    public interface ILoopClient {
+    public interface ILoopClient
+    {
 
         bool IsAuthenticated();
 
@@ -76,6 +78,13 @@ namespace BC.Loop.Api.Client {
         /// <param name="jsonObject">The JSON for the Loop Object. See the Loop docs online for how to format this.</param> 
         /// <returns>ThThe result of the query as a JSON string</returns> 
         Task<string> UpdateObjectAsync(string jsonObject);
+
+        /// <summary> 
+        /// Delete Object Link
+        /// </summary> 
+        /// <param name="jsonObject">The JSON for the Loop Object. See the Loop docs online for how to format this.</param> 
+        /// <returns>The result of the request as a JSON string</returns> 
+        Task<string> PutObjectLinksAsync(string jsonObject);
 
         /// <summary>
         /// Gets the schema asynchronous.

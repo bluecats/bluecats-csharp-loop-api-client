@@ -213,6 +213,24 @@ namespace BC.Loop.Api.Client {
             return response;
         }
 
+        /// <summary> 
+        /// Delete Object Link
+        /// </summary> 
+        /// <param name="jsonObject">The JSON for the Loop Object. See the Loop docs online for how to format this.</param> 
+        /// <returns>The result of the request as a JSON string</returns> 
+        public async Task<string> PutObjectLinksAsync(string jsonObject) {
+            if (jsonObject == null) throw new ArgumentNullException( nameof( jsonObject ) );
+            EnsureAuthenticated();
+
+            // Request
+            const string ROUTE = "objects/link";
+            var uri = new Uri( ROUTE, UriKind.Relative );
+            var request = _client.PutAsync( uri, new StringContent( jsonObject, Encoding.ASCII, "application/json" ) );
+
+            var response = await UnwrapResponseStringAsync( request ).ConfigureAwait( false );
+            return response;
+        }
+
         /// <summary>
         /// Gets the schema asynchronous.
         /// </summary>
