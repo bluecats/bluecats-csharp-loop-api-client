@@ -17,6 +17,7 @@ namespace BC.Loop.Api.Client.Models {
         public double Long { get; set; }
         public float Temp { get; set; }
         public int BatterySoC { get; set; }
+        public bool HasAssetAssociation { get; set; }
         public List<Asset> Associations { get; set; }
         public DateTime PositionObservedAt { get; set; }
         public DateTime TempObservedAt { get; set; }
