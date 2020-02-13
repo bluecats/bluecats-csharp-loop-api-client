@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
+using System.Runtime.CompilerServices;
 
 namespace BC.Loop.Api.Client.Models
 {
@@ -70,23 +72,15 @@ namespace BC.Loop.Api.Client.Models
         public DateTime MovingObservedAt { get; set; }
         public DateTime MovingChangedAt { get; set; }
         public string Site { get; set; }
-        public string SiteName { get; set; }
         public float DistanceFromSite { get; set; }
         public DateTime SiteObservedAt { get; set; }
         public DateTime SiteChangedAt { get; set; }
         public string Zone { get; set; }
-        public string ZoneName { get; set; }
         public float DistanceFromZone { get; set; }
         public string ZonePath { get; set; }
         public DateTime ZoneObservedAt { get; set; }
         public DateTime ZoneChangedAt { get; set; }
         public string LocationSource { get; set; }
-        public bool HasAssetAssociation { get; set; }
-        public List<Asset> Associations { get; set; }
-
-        public Asset() {
-            Associations = new List<Asset>();
-        }
 
     }
 
