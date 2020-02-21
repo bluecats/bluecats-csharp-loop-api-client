@@ -57,14 +57,14 @@ namespace BC.Loop.Api.Client.Models
         public string AssetIdentifier { get; set; }
         public string Description { get; set; }
         public bool Damaged { get; set; }
-        public int BatterySoC { get; set; }
+        public int? BatterySoC { get; set; }
         public DateTime BatterySoCObservedAt { get; set; }
-        public float Temp { get; set; }
+        public float? Temp { get; set; }
         public DateTime TempObservedAt { get; set; }
         public float BattV { get; set; }
         public DateTime BattVObservedAt { get; set; }
-        public double Lat { get; set; }
-        public double Long { get; set; }
+        public float? Lat { get; set; }
+        public float? Long { get; set; }
         public int HorizontalError { get; set; }
         public DateTime PositionObservedAt { get; set; }
         public DateTime PositionChangeddAt { get; set; }
